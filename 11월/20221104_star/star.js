@@ -42,14 +42,6 @@ $(document).ready(function() {
         }
         
         document.write('<br>');
-        // for(let w=5; w > i; w--) {
-        //     document.write('&nbsp;');
-        // }
-        // for(let m=-1; m < i; m++) {
-            
-        //     document.write('*');
-        // }
-        // document.write('<br>');
     }
 
 });
