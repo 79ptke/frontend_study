@@ -43,5 +43,4 @@ $(document).ready(function() {
         
         document.write('<br>');
     }
-
 });
