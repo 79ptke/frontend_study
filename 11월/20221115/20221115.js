@@ -10,6 +10,15 @@ function solution(deno1, num1, deno2, num2) {
     console.log(num / deno);
     console.log(num, deno);
 
+    let minNum;
+    // 약분
+    for(i = 0; i < deno; i++) {
+        if(deno%i === 0 && num%i === 0) {
+            minNum = i;
+            return[num/minNum, deno/minNum];
+        }
+    }
+
     return [deno, num];
 }
 
