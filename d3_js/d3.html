@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        .axis--y .domain {
+            display: none;
+        }
+        
+    </style>
+
+    <title>d3 test</title>
+</head>
+<body>
+    <svg width="922" height="550"></svg> <!--전체 그래프 크기-->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        
+        // 그래프의 사이즈 지정
+        var svg = d3.select("svg"), // 위의 svg를 가르킴
+            width = +svg.attr("width"), // 위의 svg의 width값을 가져옴
+            height = +svg.attr("height"),// 위의 svg의 height값을 가져옴
+            margin = {top: 50, right: 30, bottom: 30, left: 40}; //svg의 여백
+
+        
+        // var x = d3.scaleTime() // x축은 date type이 날짜이기때문에 scaleTime을 쓴다.
+        //     .domain([1, 31])
+        //     .range([0 , 800]); // 범위의 값이 .001 ~ .031로 나온다
+
+        // x축 범위 지정
+        var x = d3.scaleLinear() 
+            .domain([1, 31])
+            .range([0 , 850]);
+
+        // y축 범위 지정
+        var y = d3.scaleLinear() // y축은 숫자형이기 때문에 scaleLinear를 쓴다.
+            .domain([0, 45]) 
+            .range([450, 0]);
+
+        // d3.axisBottom() / axisLeft()을 이용해 x축,y축 설정
+        var xAxis = d3.axisBottom(x) // 축의 범위 / 배치설정
+            .ticks(32); // 눈금 갯수 설정
+
+        var yAxis = d3.axisLeft(y)
+            .ticks(10);
+
+        // call을 사용해서 x축, y축을 생성
+        var gx = svg.append("g")
+            .attr("class", "axisX")
+            .attr("transform", "translate(55," + (height - margin.bottom) + ")") // x축의 위치 조정  // translate값을 <--이런식으로 적어놓았는데 그냥 평범하게 translate(60,30) 써도 된다.
+            .call(xAxis);
+
+        var gy = svg.append("g")
+            .attr("class", "axisY")
+            .attr("transform", "translate(" + margin.left + ",60)") // y축의 위치 조정
+            .call(yAxis)
+            // 여기서부터 y축 text
+            .append("text")
+            .attr("x", -6) // 숫자가 높으면 위로 낮으면 아래로 텍스트가 움직임
+            .attr("y", 20) // 숫자가 높으면 오른쪽으로 낮으면 왼쪽으로 텍스트가 움직임
+            .attr("transform", "rotate(-90)")
+            .attr("fill", "#000") 
+            .attr("text-anchor", "end")
+            .attr("font-weight", "bold")
+            .text("결제 금/월 (단위 : 만원)");
+
+        d3.json("faithful.json", function(error, data) {
+            if (error) throw error;
+            var arr = [];
+            var arr2 = [];
+            var dataSet = d3.nest() //d3.nest()는 .key() method를 이용하여 '데이터의 무엇을 key로 해서 데이터를 수집할 지' 를 지정할 수 있다.
+                .key (function(d) {
+                    var keyArr = d.date.split('-'); // "date":"2022-10-10"이 2022,10,10으로 나온다.
+                    
+                    arr.push(Number(keyArr[2]));
+                    return keyArr[2]; // 2022-10-10에서 필요한 값이 10일이다.
+                })
+                .rollup(function(r){
+                    return d3.sum(r, function(d){
+                        return parseInt(d.cost_price);
+                    })                    
+                })
+                .entries(data); 
+
+            var dataLine = d3.nest()
+                .key (function(d) {
+                    var keyArr = d.date.split('-');
+                    
+                    arr2.push(Number(keyArr[2]));
+                    return keyArr[2];
+                })
+                .rollup(function(r){
+                    return d3.sum(r, function(d){
+                        return (d.date.length)/ 10; // 10일에 있는 건수 1, 25일에 있는 건수 4
+                    })                    
+                })
+                .entries(data);
+
+            console.log(dataLine);
+
+            console.log(dataSet); // {key: '10', value: 956}
+            
+
+                //tooltip
+                var tooltip = d3.select("body")
+                    .append("div")
+                    .style("position", "absolute")
+                    .style("z-index", "10")
+                    .style("visibility", "hidden")
+                    .style("padding", "10px")
+                    .style("background", "rgba(255,255,255,0.6)")                    
+                    .style("border", "1px solid #f5f5f5")
+                    .style("border-radius", "4px")
+                    .style("text-anchor", "end")
+                    .style("font-weight", "bold")
+                    .style("color", "#000")
+                    .text("a simple tooltip");
+
+        // 막대 그래프
+        svg.insert("g", "*")
+            .attr("fill", "#9ff")
+            .selectAll("rect")
+            .data(dataSet)
+            //.data(bins)
+            .enter().append("rect")
+            .attr("x", function(d) { return x(d.key) + 48; }) 
+            .attr("y", function(d) { return 70 - ((y(d.value / 10000))*-1); })
+            .attr("width", function(d) { return x(1.5); })
+            .attr("height", function(d) { return y(0) - y(d.value / 10000); })       
+            // 마우스오버
+            .text(function(d) { return d.x0; })
+            .on("mouseover", function(d){tooltip.text([d.key + '일', d.value.toLocaleString() + '원']); return tooltip.style("visibility", "visible");}) // 마우스 오버 데이터 값
+            .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");}) // tooltip 위치
+            .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+            
+
+        // 선 그래프 영역
+        svg.append("path")
+            .datum(dataLine)
+            .attr("fill", "none")
+            .attr("stroke", "#f9f") // 선 색상
+            .attr("stroke-width", 1.5) // 선 굵기
+            .attr("stroke-linejoin", "round") // 선 모양
+            .attr("d",  d3.line()
+                    .curve(d3.curveBasis)
+                    .x(function(d) { return x(d.key); })
+                    .y(function(d) {console.log( y(d.value));  return y(d.value); }))
+                    // 마우스오버
+                    .text(function(d) { return d.x0; })
+                    .on("mouseover", function(d){tooltip.text([d.value + '건']); return tooltip.style("visibility", "visible");}) // 마우스 오버 데이터 값
+                    .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");}) // tooltip 위치
+                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+        });
+    </script>
+</body>
+</html>
