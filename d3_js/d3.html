@@ -68,7 +68,7 @@
             .attr("font-weight", "bold")
             .text("결제 금/월 (단위 : 만원)");
 
-        d3.json("faithful.json", function(error, data) {
+        d3.json("faithful3.json", function(error, data) {
             if (error) throw error;
             var arr = [];
             var arr2 = [];
@@ -90,15 +90,23 @@
                 .key (function(d) {
                     var keyArr = d.date.split('-');
                     
-                    arr2.push(Number(keyArr[2]));
+                    //arr2.push(Number(keyArr[2]));
                     return keyArr[2];
                 })
                 .rollup(function(r){
                     return d3.sum(r, function(d){
-                        return (d.date.length)/ 10; // 10일에 있는 건수 1, 25일에 있는 건수 4
+                        if(d.cost_price == 0) { // 가격이 0원일때
+                            return d.date.length == 0; // 건수도 0건
+                        } else {
+                            return (d.date.length)/ 10; // 10일에 있는 건수 1, 25일에 있는 건수 4
+                        }
                     })                    
                 })
                 .entries(data);
+
+            dataLine.sort(function(a,b) { // 그냥 dataLine에 있는 값을 line chart에 넣으면 정렬이 안되어 있어 line이 꼬이므로 
+                return a.key - b.key; // sort를 사용해서 key값을 오름차순으로 정렬했다.
+            });
 
             console.log(dataLine);
 
@@ -147,15 +155,33 @@
             .attr("stroke-width", 1.5) // 선 굵기
             .attr("stroke-linejoin", "round") // 선 모양
             .attr("d",  d3.line()
-                    .curve(d3.curveBasis)
-                    .x(function(d) { return x(d.key); })
-                    .y(function(d) {console.log( y(d.value));  return y(d.value); }))
+                    //.curve(d3.curveBasis)
+                    .defined(d => !isNaN(d.value))
+                    .x(d => x(d.key) + 55)
+                    .y(d => y(d.value) + 70));
                     // 마우스오버
-                    .text(function(d) { return d.x0; })
-                    .on("mouseover", function(d){tooltip.text([d.value + '건']); return tooltip.style("visibility", "visible");}) // 마우스 오버 데이터 값
-                    .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");}) // tooltip 위치
-                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+                    //.text(function(d) { return d.x0; })
+                    //.on("mouseover", function(d){tooltip.text([d.value + '건']); return tooltip.style("visibility", "visible");}) // 마우스 오버 데이터 값
+                    //.on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");}) // tooltip 위치
+                    //.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
+        // 도트 추가
+        svg.append("g")
+            .selectAll("dot")
+            .data(dataLine)
+            .enter()
+            .append("circle")
+                .attr("cx", d => x(d.key) + 55)
+                .attr("cy", d => y(d.value) + 70)
+                .attr("r", 5)
+                .attr("stroke", '#f9f')
+                .attr("stroke-width", 4)
+                .attr("fill", "white")
+                // 마우스오버
+                .text(function(d) { return d.x0; })
+                .on("mouseover", function(d){tooltip.text([d.value + '건']); return tooltip.style("visibility", "visible");}) // 마우스 오버 데이터 값
+                .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");}) // tooltip 위치
+                .on("mouseout", function(){return tooltip.style("visibility", "hidden");});;
         });
     </script>
 </body>
