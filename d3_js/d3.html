@@ -28,7 +28,7 @@
         // fetch로 json 받아오기
         function getData() {
             var monthDate = new Date(year,month,0).getDate();;
-            fetch(`https://locationpick.com/reserve/test2?month=${month}&year=${year}`)
+            fetch(`https://localhost:3000?month=${month}&year=${year}`) // 가상의 주소
                 .then(res => res.json())
                 .then((data) => {         
                     //monthDate = new Date(year,month,0).getDate(); // 31
