@@ -22,12 +22,10 @@
         const month = "10"; //selectbox에서 10일때 
         const year = "2022";
         var dateArr = [];
-        var dataArrSet;
-        var uniqueArr;
 
         // fetch로 json 받아오기
         function getData() {
-            var monthDate = new Date(year,month,0).getDate();;
+            var monthDate = new Date(year,month,0).getDate();
             fetch(`https://localhost:3000?month=${month}&year=${year}`) // 가상의 주소
                 .then(res => res.json())
                 .then((data) => {         
