@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <title>진료순서 정하기</title>
+</head>
+<body>
+    <script>
+function solution(n) {
+    var answer = 0;
+    n = 7;
+    let num = 1;
+    let arr = [];
+    // 1) i를 순환하는데, 거기서 나온 i의 값을 다 곱해준다.
+    // 2) 곱해서 나온 값을 변수에 담는다.
+    // 3) 그 값이 n을 넘으면 순환하는 것을 막는다.
+    // 4) 그리고 마지막 i 값을 리턴한다.
+
+    for(i=1; i <= n; i++){
+            num *= i;
+        if(num <= n) {
+            arr.unshift(i);
+            console.log(arr);
+            //console.log(num);
+            // console.log(i);
+        }
+    }
+    console.log(arr[0]);
+
+    return arr[0];
+}
+
+        $(document).ready(function() {
+            solution();
+        });
+    </script>
+</body>
+</html>
