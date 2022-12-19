@@ -33,5 +33,6 @@ function Browser() {
 }
 Browser();
 ```
+-  <b>2022.12.19</b> 인클루드로 header랑 footer를 만들었는데 그 전까지 잘 작동이 되었던 click 이벤트가 작동이 되지 않았다. on click으로 바꿔도 작동이 되지 않았다. 알고보니 var windowW = $(window).width(); 라는 쓰이지 않는 변수가 있어서 그런거였다. 지워주니 작동이 잘 되었다.
    
    
