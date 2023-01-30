@@ -65,3 +65,7 @@ on click으로 바꿔도 작동이 되지 않았다.
 -  <b>2023.01.12</b> flip book을 css로 구현했다.
 -  <b>2023.01.22</b> 설날이다.
 -  <b>2023.01.23</b> 쉬는날에는 시간이 빨리 지난다.
+-  <b>2023.01.30</b> <model-viewer 옵션>  
+auto-rotate : 360도 회전  
+camera-orbit : 속도 및 카메라 각도 조절  
+disable-zoom : 줌인 줌 아웃 막기
