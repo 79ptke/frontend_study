@@ -74,3 +74,21 @@ disable-zoom : 줌인 줌 아웃 막기
 금방 수습은 되었지만 다음부터는 이런 실수를 하지 않도록 조심해야겠다.  
 다음부터는 수정하기 전에 git pull origin mai n명령어로  
 먼저 수정된거 있는지 확인하고 수정하는 습관을 만들어야겠다.
+-  <b>2023.02.03</b> electron에 jQuery 연결하는 방법  
+main.js에서   
+```javascript
+new BrowserWindow({  
+    webPreferences: {  
+      nodeIntegration : true // 이거를 추가한다. 
+    }  
+})  
+```
+그리고  
+```html
+<script>if (typeof module === 'object') {window.module = module; module = undefined;};</script>
+<script src="./src/js/jquery-3.6.3.min.js"></script>    
+<script>if (window.module) module = window.module;</script>
+```
+을 사용한다.  
+참고 링크1: https://itinerant.tistory.com/93  
+참고 링크2: https://spadeworkdiary.tistory.com/4
