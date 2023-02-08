@@ -93,3 +93,4 @@ new BrowserWindow({
 참고 링크1: https://itinerant.tistory.com/93  
 참고 링크2: https://spadeworkdiary.tistory.com/4
 -  <b>2023.02.06</b> 미세먼지가 심했다. 걸어왔더니 목이 칼칼하다.
+-  <b>2023.02.08</b> 서버 세팅하는 법을 배웠다.
