@@ -94,3 +94,5 @@ new BrowserWindow({
 참고 링크2: https://spadeworkdiary.tistory.com/4
 -  <b>2023.02.06</b> 미세먼지가 심했다. 걸어왔더니 목이 칼칼하다.
 -  <b>2023.02.08</b> 서버 세팅하는 법을 배웠다.(aws / putty / studio 3T)
+-  <b>2023.02.16</b> 로그인 페이지 프론트 제대로 구현해보기 /  
+input file 이미지 썸네일 처리  drag and drop으로 처리해보기
