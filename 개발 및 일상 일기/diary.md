@@ -99,3 +99,7 @@ input file 이미지 썸네일 처리  drag and drop으로 처리해보기
 -  <b>2023.02.17</b> model-viewer에서 lighting처리 방법 : exposure="2"  
 그림자 처리 방법 : shadow-intensity="1"  
 숫자가 커질수록 빛과 그림자 강도가 강해진다. (0은 없는것)
+-  <b>2023.02.17</b> 주말에 할일:  
+1) 카페맵 removeclass('on')하면 마커 사라지게 처리
+2) 웹북 만든거 기능 점검
+3) 퍼즐도 기능 점검
