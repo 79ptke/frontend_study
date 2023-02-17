@@ -96,3 +96,6 @@ new BrowserWindow({
 -  <b>2023.02.08</b> 서버 세팅하는 법을 배웠다.(aws / putty / studio 3T)
 -  <b>2023.02.16</b> 로그인 페이지 프론트 제대로 구현해보기 /  
 input file 이미지 썸네일 처리  drag and drop으로 처리해보기
+-  <b>2023.02.17</b> model-viewer에서 lighting처리 방법 : exposure="2"  
+그림자 처리 방법 : shadow-intensity="1"  
+숫자가 커질수록 빛과 그림자 강도가 강해진다. (0은 없는것)
