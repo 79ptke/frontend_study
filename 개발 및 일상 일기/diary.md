@@ -103,3 +103,23 @@ input file 이미지 썸네일 처리  drag and drop으로 처리해보기
 1) 카페맵 removeclass('on')하면 마커 사라지게 처리
 2) 웹북 만든거 기능 점검
 3) 퍼즐도 기능 점검
+-  <b>2023.02.20</b> 3D 모델 뷰어
+```javascript
+<model-viewer class="img3d" id="hotspot-camera-view-demo" src="파일이름.glb" animation-name="circle" ar ar-modes="webxr scene-viewer quick-look" auto-rotate camera-controls camera-orbit="auto 75deg auto" disable-zoom environment-image="neutral" shadow-intensity="1">    
+                                <button class="view-button hotspot-1" slot="hotspot-1" data-position="-0.1997m 2000.11766m 0.0056m" data-normal="150.4421014m 0.04410423m 0.8958802m" data-orbit="3.711166deg -180.3035deg 0.04335197m" data-target="-0.1879433m 2000.11766m -0.01563221m"></button>         
+</model-viewer>
+                            
+<script>
+    const modelViewer2 = document.querySelector("#hotspot-camera-view-demo");
+    const annotationClicked = (annotation) => {
+        let dataset = annotation.dataset;
+        modelViewer2.cameraTarget = dataset.target;
+        modelViewer2.cameraOrbit = dataset.orbit;
+        modelViewer2.fieldOfView = '45deg';
+    }
+
+    modelViewer2.querySelectorAll('button').forEach((hotspot) => {
+        hotspot.addEventListener('click', () => annotationClicked(hotspot));
+    });
+</script>
+```
