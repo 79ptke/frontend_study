@@ -106,13 +106,15 @@ input file 이미지 썸네일 처리  drag and drop으로 처리해보기
 -  <b>2023.02.20</b> 3D 모델 뷰어
 ```html
 <model-viewer class="img3d" id="hotspot-camera-view-demo" src="파일이름.glb" animation-name="circle" ar ar-modes="webxr scene-viewer quick-look" auto-rotate camera-controls camera-orbit="auto 75deg auto" disable-zoom environment-image="neutral" shadow-intensity="1">    
-                                <button class="view-button hotspot-1" slot="hotspot-1" data-position="-0.1997m 2000.11766m 0.0056m" data-normal="150.4421014m 0.04410423m 0.8958802m" data-orbit="3.711166deg -180.3035deg 0.04335197m" data-target="-0.1879433m 2000.11766m -0.01563221m"></button>         
+     <button class="view-button hotspot-1" slot="hotspot-1" data-position="-0.1997m 2000.11766m 0.0056m" data-normal="150.4421014m 0.04410423m 0.8958802m" data-orbit="3.711166deg -180.3035deg 0.04335197m" data-target="-0.1879433m 2000.11766m -0.01563221m"></button>     
+    <button class="view-button hotspot-5" slot="hotspot-5" data-position="400.1989m 1000.16711m -0.0749m" onclick="resetTurntableRotation();"></button>
 </model-viewer>
 ```
 ```javascript
 // data-position : 스팟 위치 조정  
 // data-orbit: 보여지는 각도 deg deg m (가운데 deg가 -면 윗면이 보이고, 그냥이면 숫자가 커질수록 아랫면이 포커스 된다.)
 // data-target: 카메라 각도
+// onclick="resetTurntableRotation() : 카메라 각도 초기화
 <script>
     const modelViewer2 = document.querySelector("#hotspot-camera-view-demo");
     const annotationClicked = (annotation) => {
