@@ -136,7 +136,7 @@ input file 이미지 썸네일 처리  drag and drop으로 처리해보기
 -  <b>2023.02.24</b> 주말에 할일:바닐라 자바스크립트로 슬라이더 만들기/ 퍼즐 drag & drop 만들기/ flip book 제이쿼리로 된거 자바스크립트로 바꾸기 
 -  <b>2023.02.25</b> 조개구이 맛있다🦪
 -  <b>2023.02.28</b> 내일 할일: 바닐라 자바스크립트로 슬라이더/페이징/input file 여러개 썸네일 나오게 처리/  (+ 개인 프로젝트 )
--  <b>2023.03.02</b> 동적으로 생성된 div에 addEventListener 클릭 이벤트
+-  <b>2023.03.02</b> 동적으로 생성된 div에 addEventListener 클릭 이벤트 (--> 퍼블리싱 폴더에 썸네일 multi input file이랑 같이 있음)
 ```javascript
 let  = document.querySelectorAll("#thumbWrap .thumb .xBtn");
  document.addEventListener('click',function(e){
@@ -144,4 +144,16 @@ let  = document.querySelectorAll("#thumbWrap .thumb .xBtn");
         e.target.closest(".thumb").remove();
     }
 }); 
+```
+-  <b>2023.03.03</b> 특정 시간동안 해당 이벤트 없을 시 새로고침 
+```javascript
+// 2분동안 click 이벤트 없으면 화면 새로고침
+let noclick  = window.addEventListener('click', function (e) { 
+    if (noclick) { 
+        clearTimeout(noclick); 
+    } 
+    noclick = setTimeout(function() { 
+        location.reload(true);
+    }, 120000); 
+});
 ```
