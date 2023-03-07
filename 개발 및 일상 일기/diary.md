@@ -158,3 +158,17 @@ let noclick  = window.addEventListener('click', function (e) {
     }, 120000); 
 });
 ```
+-  <b>2023.03.07</b> javascript에서 :not()사용법
+```javascript
+var elements = document.querySelectorAll(
+    'ul li:not([style*="display:none"]):not([style*="display: none"])'
+);
+```
+```html
+<ul>
+    <li style="display:none;">1</li>
+    <li>2</li>
+    <li style="display:none;">3</li>
+    <li>4</li>
+</ul>
+```
