@@ -153,7 +153,8 @@ let noclick  = window.addEventListener('click', function (e) {
         clearTimeout(noclick); 
     } 
     noclick = setTimeout(function() { 
-        location.reload(true);
+        location.reload(); // location.reload(false);랑 같은 뜻. 새로고침시 클라이언트 캐쉬에서 불러온다.
+        //location.reload(true); // 이렇게 하면 페이지 새로고침시 서버에서 불러온다.
     }, 120000); 
 });
 ```
