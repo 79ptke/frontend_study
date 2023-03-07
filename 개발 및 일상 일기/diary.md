@@ -174,3 +174,7 @@ var elements = document.querySelectorAll(
 ```
 -  <b>2023.03.07</b> netlify 정적 사이트 올릴때 build 오류가 난 이유  
 gitignore에서 build가 있었기 때문이다.  node_modules만 빼고 다 지워줬더니 build에 성공했다!
+-  <b>2023.03.07</b> 카카오API에 내가 만든 사이트 등록하는법  
+1) 내 애플리케이션
+2) 왼쪽 메뉴에서 플랫폼 선택
+3) 아래 Web에서 주소 설정 (-> 주소 에러시 주소의 마지막 /지워주기)
