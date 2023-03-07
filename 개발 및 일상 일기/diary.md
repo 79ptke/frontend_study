@@ -172,3 +172,5 @@ var elements = document.querySelectorAll(
     <li>4</li>
 </ul>
 ```
+-  <b>2023.03.07</b> netlify 정적 사이트 올릴때 build 오류가 난 이유  
+gitignore에서 build가 있었기 때문이다.  node_modules만 빼고 다 지워줬더니 build에 성공했다!
