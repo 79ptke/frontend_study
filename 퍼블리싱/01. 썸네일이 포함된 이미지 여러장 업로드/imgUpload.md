@@ -5,7 +5,7 @@
     <label for="file">
         <div class="upload">파일 업로드하기</div>
     </label>
-    <input type="file" name="file" id="thumbFile" multiple>
+    <input type="file" name="img" id="thumbFile" class="imgFileUpload" accept='image/*' multiple>
 </div>
 <div id="thumbWrap">
 </div>
@@ -53,18 +53,21 @@
     margin-bottom: 1rem;
 }
 .fileWrap .upload,
-.fileWrap #thumbFile {
+.fileWrap .imgFileUpload {
     width: fit-content;
     padding: 1rem 2rem;
     border: 0.1rem solid #0078bd;
     border-radius: 0.8rem;
     color: #0078bd;
 }
-.fileWrap #thumbFile {
+.fileWrap .imgFileUpload {
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
+}
+.fileWrap .imgFileUpload.hide {
+    display: none;
 }
 ```
 
@@ -99,7 +102,6 @@ window.addEventListener('load', function() {
                 $imgDiv.appendChild($label);
                 $imgDiv.appendChild($remove);
 
-                
                 reader.onload = e => {
                     $img.src = e.target.result;
                 }
@@ -110,18 +112,35 @@ window.addEventListener('load', function() {
 
         }
     }
-    const thumbFile = document.getElementById("thumbFile");
-    thumbFile.addEventListener("change", e => {
-        imgUpload(e.target);
+    
+    document.addEventListener('click', function(e) {
+        if(e.target && e.target.className === 'imgFileUpload') {
+            const thumbFiles = document.querySelectorAll(".imgFileUpload");
+            thumbFiles.forEach(function(thumbFile) {
+                thumbFile.addEventListener("change", e => {
+                    imgUpload(e.target);
+                    // file 추가
+                    e.target.classList.add('hide');
+                    const $inputFile = document.createElement("input"); 
+                    $inputFile.type = "file";
+                    $inputFile.classList.add('imgFileUpload');
+                    $inputFile.setAttribute("name","img");
+                    $inputFile.setAttribute("accept","image/*");
+                    $inputFile.setAttribute("multiple","");
+                    document.querySelector('.fileWrap').appendChild($inputFile);
+                });
+            });
+        }
     });
     
     // 이미지 삭제
     let  = document.querySelectorAll("#thumbWrap .thumb .xBtn");
     document.addEventListener('click',function(e){
         if(e.target && e.target.className == 'xBtn'){
-                e.target.closest(".thumb").remove();
+            e.target.closest(".thumb").remove();
         }
     }); 
+
 });
 ```
 <img src="./img/img.jpg"  width="700" height="276" alt="input file multi 이미지 업로드">
