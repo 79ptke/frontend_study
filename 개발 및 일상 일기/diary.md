@@ -179,3 +179,18 @@ gitignore에서 build가 있었기 때문이다.  node_modules만 빼고 다 지
 2) 왼쪽 메뉴에서 플랫폼 선택
 3) 아래 Web에서 주소 설정 (-> 주소 에러시 주소의 마지막 /지워주기)
 -  <b>2023.03.14</b> 어제 새로운 사람이 들어왔다. 그래서 오늘 직원들끼리 회식하기로 했다. 🍗
+-  <b>2023.03.14</b> 파라미터
+```javascript
+
+            dateString = dateString.replaceAll('-','');
+
+            const urlParams = new URL(location.href).searchParams; // URL에 담긴 파라미터 정보
+            const type = urlParams.get('type'); // type이라는 파라미터를 받아옴
+
+            let getUrl =
+                `?type=${type}`
+                + `&date=${dateString}` // date파라미터를 전달
+            ;
+
+            window.location.replace(getUrl);
+```
