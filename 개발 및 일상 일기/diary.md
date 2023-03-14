@@ -182,7 +182,7 @@ gitignore에서 build가 있었기 때문이다.  node_modules만 빼고 다 지
 -  <b>2023.03.14</b> 파라미터
 ```javascript
 
-            dateString = dateString.replaceAll('-','');
+            dateString = dateString.replaceAll('-',''); // 2023-01-01 을 20230101로 
 
             const urlParams = new URL(location.href).searchParams; // URL에 담긴 파라미터 정보
             const type = urlParams.get('type'); // type이라는 파라미터를 받아옴
