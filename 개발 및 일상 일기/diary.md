@@ -194,7 +194,7 @@ gitignore에서 build가 있었기 때문이다.  node_modules만 빼고 다 지
 
             window.location.replace(getUrl);
 ```
--  <b>2023.03.14</b> 파라미터 - 특정 파라미터 값만 가져오기 
+-  <b>2023.03.15</b> 파라미터 - 특정 파라미터 값만 가져오기 
 ```javascript
 let pageUrl = window.location.search;
 let pageOn = new URLSearchParams(pageUrl);
