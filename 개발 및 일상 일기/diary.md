@@ -200,3 +200,17 @@ let pageUrl = window.location.search;
 let pageOn = new URLSearchParams(pageUrl);
 let urlPage = pageOn.get('page'); // page라는 파라미터 값을 가져온다.
 ```
+-  <b>2023.03.20</b> FormData는 문자열화 할 수 없는 객체이기 때문에 console.log에 안찍힌다.  
+FormData의 값을 확인하고 싶다면
+```javascript
+// key r값 확인
+for (let key of formData.keys()) {
+  console.log(key);
+}
+
+// value 값 확인
+for (let value of formData.values()) {
+  console.log(value);
+}
+```
+이런식으로 적으면 된다.
