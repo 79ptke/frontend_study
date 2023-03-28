@@ -220,3 +220,4 @@ for (let value of formData.values()) {
 -  <b>2023.03.27</b> 이미지 비율 고정 aspect-ratio: 16 / 9; 이런식으로 사용하면된다.  
 대신 heigth값이 고정되어 있거나 min-height, min-width가 있으면 되지 않는다.  
 안에 있는 요소의 값이 부모 요소보다 크기가 넘어도 작동되지 않는다.
+-  <b>2023.03.28</b> 야근
