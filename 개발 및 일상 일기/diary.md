@@ -221,3 +221,4 @@ for (let value of formData.values()) {
 대신 heigth값이 고정되어 있거나 min-height, min-width가 있으면 되지 않는다.  
 안에 있는 요소의 값이 부모 요소보다 크기가 넘어도 작동되지 않는다.
 -  <b>2023.03.28</b> 야근
+-  <b>2023.04.01</b> 강릉 당일치기 🌊⛱
